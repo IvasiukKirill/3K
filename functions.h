@@ -4,6 +4,9 @@
 
 QString authorize(std::string login, std::string password);
 
-//QString ();
+QString start();
+QString finish();
+QString next();
+QString send_status();
 
 #endif // FUNCTIONS_H

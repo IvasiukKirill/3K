@@ -29,7 +29,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \  #добавление заголовочных файлов
-    D:/Study/Универ/Технологии и методы программирования/function.h \
+   D:\Study\ServerPL\function.h \
     functions.h \
     mytcpserver.h \
     functions.h
