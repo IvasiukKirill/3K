@@ -1,7 +1,11 @@
-#include <iostream>
+#include <QCoreApplication>
+#include "mytcpserver.h"
 
-int main(int argc, char const *argv[])
+int main(int argc, char *argv[])
 {
-   std::cout << "Hello world from 3k!\n";
-   return 0;
+    QCoreApplication a(argc, argv);
+
+    MyTcpServer server;
+
+    return a.exec();
 }

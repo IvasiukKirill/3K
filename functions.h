@@ -2,11 +2,12 @@
 #define FUNCTIONS_H
 #include <QString>
 
-QString authorize(std::string login, std::string password);
-
+QString auth(std::string login, std::string password);
 QString start();
 QString finish();
-QString next();
-QString send_status();
+QString nextmotion();
+QString send_stat();
+QString sendresgame();
+QString endgamechack();
 
 #endif // FUNCTIONS_H
