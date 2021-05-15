@@ -63,11 +63,11 @@ void MyTcpServer::slotServerRead(){
 
         qDebug()<<"login = "<<QString::fromStdString(log)
                <<"password = "<<QString::fromStdString(pass)
-              <<"result = "<<authorize(log,pass);
+              <<"result = "<<auth(log,pass);
 
 
         array.clear();
-        array.append(authorize(log,pass));
+        array.append(auth(log,pass));
 
         clientSocket->write(array);
 

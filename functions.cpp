@@ -1,7 +1,7 @@
 #include "functions.h"
 #include <iostream>
 
-QString authorize(std::string login,std::string password) //авторизация
+QString auth(std::string login,std::string password) //авторизация
 {
     QString result;
     if (login =="admin" && password == "123")
