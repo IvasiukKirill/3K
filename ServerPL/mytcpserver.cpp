@@ -41,37 +41,21 @@ void MyTcpServer::slotNewConnection(){
 void MyTcpServer::slotServerRead(){
     QTcpSocket* clientSocket=(QTcpSocket*)sender();
     int id = (int)clientSocket->socketDescriptor();
+    QByteArray array;
+    std::string message;
     while(clientSocket->bytesAvailable()>0)
     {
-        QByteArray array =clientSocket->readAll();
-        std::string log = "";
-        std::string pass = "";
-        std::string message;
-        message = array.toStdString();
-        qDebug()<<QString::fromStdString(message);
-
-        int pos = message.find("&");
-
-        message.erase(0,pos+1);
-        pos = message.find("&");
-        log = message.substr(0,pos);
-        message.erase(0,pos+1);
-
-        pos = message.find("&");
-        pass = message.substr(0,pos);
-        message.erase(0,pos+1);
-
-        qDebug()<<"login = "<<QString::fromStdString(log)
-               <<"password = "<<QString::fromStdString(pass)
-              <<"result = "<<auth(log,pass);
-
-
-        array.clear();
-        array.append(auth(log,pass));
-
-        clientSocket->write(array);
-
+        array =clientSocket->readAll();
+        message.append(array);
     }
+    message="auth&qeq&rew";
+    qDebug()<<QString::fromStdString(message);
+
+    array.clear();
+    array.append(QString::fromStdString(parsing(message)));
+
+    clientSocket->write(array);
+
 }
 
 void MyTcpServer::slotClientDisconnected(){

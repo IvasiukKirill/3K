@@ -1,4 +1,5 @@
 QT -= gui
+QT += sql
 
 QT += network #Для работы с сетью
 
@@ -18,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \ #добавление файлов cpp
+    database.cpp \
     functions.cpp \
     game.cpp \
         main.cpp \
@@ -31,6 +33,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \  #добавление заголовочных файлов
    D:\Study\ServerPL\function.h \
+    database.h \
     functions.h \
     game.h \
     mytcpserver.h \

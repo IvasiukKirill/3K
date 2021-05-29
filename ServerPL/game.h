@@ -7,10 +7,10 @@ class game
 public:
     game();
 };
-QString start();
-QString finish();
-QString nextmotion();
-QString sendresgame();
-QString endgamechack();
+std::string start();
+std::string finish();
+std::string nextmotion();
+std::string sendresgame();
+std::string endgamechack();
 
 #endif // GAME_H
