@@ -1,6 +1,7 @@
 #include "functions.h"
 #include <iostream>
 #include "database.h"
+#include "game.h"
 
 std::string new_param(std::string & temp)
 {
@@ -26,24 +27,31 @@ std::string parsing(std::string mess)
         pass = new_param(mess);
         return auth(log,pass);
     }
+
     else if (name_of_func=="status"){
         return "status";
     }
+
     else if (name_of_func=="start"){
-        return "start";
+         std::string pole = ""; //создание поля
+         pole = new_param(mess);
+         //char* tab = std::string start(pole);
+
     }
 
     else if (name_of_func=="finish"){
-        return"finish";
+        std::string finish (mess);
     }
 
     else if (name_of_func=="nextmotion"){
-        return "nextmotion";
+        std::string move = "";
+        move = new_param(mess);
+        std::string nextmotion(move);
+
     }
     else {
         return "statistic";
     }
-
 }
 
 std::string auth(std::string login,std::string password) //авторизация
@@ -58,11 +66,15 @@ std::string auth(std::string login,std::string password) //авторизаци�
 */
     DataBase db;
     db.open();
-    db.querry("");
-    std::string result=db.querry("");
+    //db.querry("");
+    std::string result = db.querry("SELECT * FROM bd_kr_nl;");
+    if (result == ""){
+        result = "auth_false";
+    }
+    else{
+        result = "auth_statistic";
+    }
 
-    //проверка, если ничего не нашли, то result = "auth_false";
-    //иначе result = "auth_statistic";
     return result;
 }
 

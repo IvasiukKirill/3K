@@ -1,4 +1,5 @@
 #include "game.h"
+#include "functions.h"
 #include <iostream>
 
 game::game()
@@ -6,20 +7,28 @@ game::game()
 
 }
 
-std::string start(){ //обработка запроса на старт
+std::string start(std::string pole){ //обработка запроса на старт, создание массива с игрой
     std::string result;
-    std::cout << "Beginning of the game" << std::endl;
+    int s = std::stoi(pole); //размер массива
+    /*char* tab[s][s];
+    for (int i = 0; i < s; i++){
+        for (int j = 0; j < s; i++){
+            tab[i][j] = 0;
+        }
+    }
+    std::cout << "Beginning of game" << std::endl;
+    //return tab; */
     return result;
 }
 
 std::string finish(){ //обработка запроса на конец
     std::string result;
-    std::cout << "The end of the game" << std::endl;
+    std::cout << "Your game is over" << std::endl;
     return result;
 }
 std::string nextmotion(){ //обработка запроса на очер хода
     std::string result;
-    std::cout << "Game processing" << std::endl;
+    std::cout << "Your turn" << std::endl;
     result = sendresgame();
     result = endgamechack();
     return result;

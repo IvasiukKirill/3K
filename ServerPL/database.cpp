@@ -1,5 +1,7 @@
 #include "database.h"
 #include <QString>
+#include <QSqlQuery>
+#include <QDebug>
 
 DataBase::DataBase()
 {
@@ -7,7 +9,7 @@ DataBase::DataBase()
 }
 bool DataBase::open(){
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName("sqlite.db");
+    db.setDatabaseName("D:/Study/ServerPL/sqlite.db");
     if(db.open()){
         return true;
     } else {
@@ -17,5 +19,16 @@ bool DataBase::open(){
 
 std::string DataBase::querry(std::string str_querry)
 {
-    return "dgfd";
+    qDebug() << QString::fromStdString(str_querry) << "\n";
+    std::string res;
+    QSqlQuery query(db);
+    query.exec(QString::fromStdString(str_querry));
+        /*while (query.next()) {
+            QString country = query.value(0).toString();
+            res+=(country.toStdString());
+        }*/
+    query.next();
+    res = query.value(1).toString().toStdString();
+    qDebug() << QString::fromStdString(res) << "\n";
+    return res;
 }
