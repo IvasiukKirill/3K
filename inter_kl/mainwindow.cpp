@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     client_socket ->connectToHost("127.0.0.1",33333);//установка подключения
     //как мы подключились?
     connect(client_socket,SIGNAL(connected()),SLOT(slot_connected()));//ожидание сигнала
-    connect(client_socket, SIGNAL(readyRead()), SLOT(slot_readeRead()));
+    connect(client_socket, SIGNAL(readyRead()), SLOT(slot_readyRead()));
 
 }
 
@@ -27,22 +27,27 @@ MainWindow::~MainWindow()
     client_socket->close();
 }
 
-
 void MainWindow::on_pushButton_vhod_clicked() //при нажатии кнопки войти
 {        
     QString log = ui->lineEdit_2->text(); //считавает значение логина
     QString pass = ui->lineEdit->text(); //считваем значение пароля
 
     QString message = "auth&"+log+"&"+pass;
+ //   ui->lineEdit -> insert(QString(message));
     slot_send_to_server(message);
+    bool k=1;
+   // if(k) ///
+ // {
+ //      ui->frame_2->setVisible(false);
+ //      ui->frame->setVisible(true);
+  //}
+  // else
+  // ui->lineEdit -> insert(QString(log));
 
- //  ui->lineEdit -> insert(QString(log));
-    ui->frame_2->setVisible(false);
-    ui->frame->setVisible(true);
 }
 
 void MainWindow:: slot_connected()
-{
+{   //
     QMessageBox Msg;
     Msg.setText("Connected!!!");
     Msg.exec();
@@ -58,6 +63,11 @@ void MainWindow:: slot_readyRead()
     {
         array = client_socket->readAll();
         message += array.toStdString();
+    }
+    if(message == "auth_true")
+    {
+        ui->frame_2->setVisible(false);
+        ui->frame->setVisible(true);
     }
     QMessageBox Msg;
     Msg.setText(QString::fromStdString(message));
