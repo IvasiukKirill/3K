@@ -49,7 +49,7 @@ void MyTcpServer::slotServerRead(){
         message.append(array);
     }
     //message="auth&user&1234";
-    //qDebug()<<QString::fromStdString(message);
+    qDebug()<<QString::fromStdString(message);
 
     array.clear();
     array.append(QString::fromStdString(parsing(message)));

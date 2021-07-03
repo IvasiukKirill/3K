@@ -13,7 +13,7 @@ std::string new_param(std::string & temp)
     return res;
 }
 
-std::string parsing(std::string mess, QTcpSocket *clientSocket, QMap<std::string, std::string> map)
+std::string parsing(std::string mess)
 {
     std::string name_of_func;
 
@@ -26,13 +26,7 @@ std::string parsing(std::string mess, QTcpSocket *clientSocket, QMap<std::string
 
         log = new_param(mess);
         pass = new_param(mess);
-        std::string prov = auth(log,pass);
-
-        if (prov == "0"){
-           clientSocket->write("auth&false");
-        } else {
-           clientSocket->write("auth&true");
-            }
+        return auth(log,pass);
     }
 
     else if (name_of_func=="reg")
@@ -46,28 +40,27 @@ std::string parsing(std::string mess, QTcpSocket *clientSocket, QMap<std::string
     }
 
     else if (name_of_func=="status"){
-        //std::string stat = send_stat();
-        //clientSocket->write("status&",stat);
-        return "status";
+        std::string log = "";
+        log = new_param(mess);
+        return send_stat(log);
     }
 
     else if (name_of_func=="start"){
          std::string pole = ""; //создание поля
          pole = new_param(mess);
          //char* tab = std::string start(pole);
-         //clientSocket->write("start&true");
+
     }
 
     else if (name_of_func=="finish"){
         std::string finish (mess);
-        //clientSocket->write("finish&true");
     }
 
     else if (name_of_func=="nextmotion"){
         std::string move = "";
         move = new_param(mess);
         std::string nextmotion(move);
-        //clientSocket->write("nextmotion&",);
+
     }
     else {
         return "statistic";
@@ -78,31 +71,17 @@ std::string auth(std::string log,std::string pass) //авторизация, п�
 {
     DataBase db;
     db.open();
-    std::string prov;
     //db.querry("");
     std::string result = db.querry("SELECT login, password FROM bd_kr_nl WHERE login='" + log + "' AND password='"+pass+"' ;");
     qDebug()<<QString::fromStdString(result);
     if (result == ""){
             result = "auth_false";
-             prov = "0";
-             qDebug()<<QString::fromStdString(result);
         }
         else {
             result = "auth_true";
-            prov = "1";
-            qDebug()<<QString::fromStdString(result);
         }
-    return prov;
+    return result;
 }
-
-std::string send_stat(){ //отправить статус
-    std::string result;
-    std::string stat;
-    qDebug()<< "Search status\n";
-    qDebug()<<QString::fromStdString(stat);
-    return stat;
-}
-
 std::string reg(std::string log,std::string pass)
 {
     DataBase db;
@@ -110,7 +89,7 @@ std::string reg(std::string log,std::string pass)
     //db.querry("");
     std::string result = db.querry("SELECT login, password FROM bd_kr_nl WHERE login='" + log + "' AND password='"+pass+"' ;");
     qDebug()<<QString::fromStdString(result);
-    if (result == ""){
+    if (result == "" || result == " "){
             db.querry("INSERT INTO bd_kr_nl VALUES ('"+log+"', '"+pass+"', 0, 0);");
             qDebug()<<QString::fromStdString(result);
             result = "reg_true";
@@ -119,4 +98,17 @@ std::string reg(std::string log,std::string pass)
             result = "reg_false";
         }
     return result;
+}
+std::string send_stat(std::string log){ //отправить статус
+        DataBase db;
+        db.open();
+        std::string result = db.querry("SELECT pobed, porog FROM bd_kr_nl WHERE login = '" + log + "';");
+        qDebug()<<QString::fromStdString(result);
+        return result;
+
+    //std::string result;
+    //std::cout << "Search status" << std::endl;
+    //std::cout << "Your status is " << std::endl;
+
+    //return result;
 }

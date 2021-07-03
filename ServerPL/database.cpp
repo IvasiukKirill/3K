@@ -28,7 +28,7 @@ std::string DataBase::querry(std::string str_querry)
             res+=(country.toStdString());
         }*/
     query.next();
-    res = query.value(0).toString().toStdString();
+    res = query.value(0).toString().toStdString()+query.value(1).toString().toStdString();
     qDebug() << QString::fromStdString(res) << "\n";
     return res;
 }
