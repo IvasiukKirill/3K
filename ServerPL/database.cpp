@@ -2,7 +2,9 @@
 #include <QString>
 #include <QSqlQuery>
 #include <QDebug>
-
+/*! \brief Методы класса fatabase
+    Присоединяется к базе данных, проверяет успешность подключение и считывает значения после отправления запроса
+*/
 DataBase::DataBase()
 {
     //db = new QSqlDatabase;

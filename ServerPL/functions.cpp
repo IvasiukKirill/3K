@@ -3,7 +3,9 @@
 #include "database.h"
 #include "game.h"
 #include <QDebug>
-
+/*! \brief Методы класса functions
+    Занимается разбором сообщения, разбивает сообщения, проводит регистрацию и авторизацию и высылает статистику побед-проигрышей
+*/
 std::string new_param(std::string & temp)
 {
     int pos = -1;

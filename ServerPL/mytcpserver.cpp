@@ -3,7 +3,10 @@
 #include <QCoreApplication>
 #include <QString>
 #include "functions.h"
+/*! \brief Методы класса mytcpserver
+    Реализуется возможность подключения к серверу, отсоединения, подключения нескольких клиентов, считывание приходящих сообщений
 
+    */
 MyTcpServer::~MyTcpServer()
 {
     foreach(int i,SClients.keys()){

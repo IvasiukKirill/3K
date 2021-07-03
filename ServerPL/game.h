@@ -1,7 +1,10 @@
 #ifndef GAME_H
 #define GAME_H
 #include <QString>
+/*!
+     Класс game содержит непосредственно процесс самой игры
 
+ */
 class game
 {
 public:

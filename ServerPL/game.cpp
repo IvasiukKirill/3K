@@ -1,13 +1,16 @@
 #include "game.h"
 #include "functions.h"
 #include <iostream>
+/*! \brief Методы класса game
+    Реализуется основная часть игры: обработка запросов на старт и окончание игры, обрабатывает ходы, проводит проверку на окончание игры, и отправляет текущую позицию
 
+    */
 game::game()
 {
 
 }
 
-std::string start(std::string pole){ //обработка запроса на старт, создание массива с игрой
+std::string start(std::string pole){ //!обработка запроса на старт, создание массива с игрой
     std::string result;
     int s = std::stoi(pole); //размер массива
     /*char* tab[s][s];
@@ -21,25 +24,25 @@ std::string start(std::string pole){ //обработка запроса на с
     return result;
 }
 
-std::string finish(){ //обработка запроса на конец
+std::string finish(){ ///обработка запроса на конец
     std::string result;
     std::cout << "Your game is over" << std::endl;
     return result;
 }
-std::string nextmotion(){ //обработка запроса на очер хода
+std::string nextmotion(){ ///обработка запроса на очер хода
     std::string result;
     result = sendresgame();
     result = endgamechack();
     return result;
 }
 
-std::string sendresgame(){ //отправить результат игры
+std::string sendresgame(){ ///отправить текущую позицию
     std::string result;
     std::cout << "Send result" << std::endl;
     return result;
 }
 
-std::string endgamechack(){ //проверка на конец игры
+std::string endgamechack(){ ///проверка на конец игры
     std::string result;
     std::cout << "The game finish?" << std::endl;
     return result;

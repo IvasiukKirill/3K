@@ -1,5 +1,11 @@
 #ifndef MYTCPSERVER_H
 #define MYTCPSERVER_H
+
+/*!
+     Класс mytcpserver реализует подлючение к серверу и прием сообщений от клиента через сокет
+
+ */
+
 #include <QObject>
 #include <QTcpServer> //класс с сигналами tcp
 #include <QTcpSocket> //класс для работы с сокетами, передача инфы между клиентом и сервером
